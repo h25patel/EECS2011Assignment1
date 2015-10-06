@@ -53,46 +53,47 @@ public class SparseNumericVector implements Iterable {
 	 */
 	public void add(SparseNumericElement e) {
 		// implement this method
-		
-		//create an element and node to iterate through the current list
-		SparseNumericElement nodeElem = new SparseNumericElement(e.getIndex(), e.getValue());
-	       SparseNumericNode newNode = new SparseNumericNode(nodeElem, null);
-	    // check if you're at the end of the list. i.e. first the node into the list, by setting the previous node to
-		// point to the new node and the new node to point to the next node.
-	       if(this.head == null){
-	    	   this.head = newNode;
-	    	   this.tail = head;
-	    	   size++;
-	       }else if( this.head == this.tail && nodeElem.getIndex() < head.getElement().getIndex()){
-	    	   newNode.setNext(this.head);
-	    	   this.head = newNode;
-	    	   size++;
-	       }else if(this.head == this.tail && nodeElem.getIndex() > this.head.getElement().getIndex()){
-	    	   this.head.setNext(newNode);
-	    	   this.tail = this.head.getNext();
-	    	   size++;	   
-	       }else{
-	    	   SparseNumericNode first = head;
-	    	   SparseNumericNode second = first.getNext();
 
-	    	// if you're somewhere else in the list, look for where to add the
-				// element.
-	    	   while(first.getNext() != null){
-	    		   
-	    			   if(first.getElement().getIndex() == nodeElem.getIndex()){
-	    				   newNode.setNext(first.getNext());
-	    			   }
-	    			   if(nodeElem.getIndex() < second.getElement().getIndex()){
-	    				   newNode.setNext(second);
-	    				   first.setNext(newNode);
-	    				   size++;
-	    				   break;
-	    			   } //get the next elements
-	    			   first = first.getNext();
-	    			   second = second.getNext();
-	    		   
-	    	   }
-	       } 
+		// create an element and node to iterate through the current list
+		SparseNumericElement nodeElem = new SparseNumericElement(e.getIndex(), e.getValue());
+		SparseNumericNode newNode = new SparseNumericNode(nodeElem, null);
+		// check if you're at the end of the list. i.e. first the node into the
+		// list, by setting the previous node to
+		// point to the new node and the new node to point to the next node.
+		if (this.head == null) {
+			this.head = newNode;
+			this.tail = head;
+			size++;
+		} else if (this.head == this.tail && nodeElem.getIndex() < head.getElement().getIndex()) {
+			newNode.setNext(this.head);
+			this.head = newNode;
+			size++;
+		} else if (this.head == this.tail && nodeElem.getIndex() > this.head.getElement().getIndex()) {
+			this.head.setNext(newNode);
+			this.tail = this.head.getNext();
+			size++;
+		} else {
+			SparseNumericNode first = head;
+			SparseNumericNode second = first.getNext();
+
+			// if you're somewhere else in the list, look for where to add the
+			// element.
+			while (first.getNext() != null) {
+
+				if (first.getElement().getIndex() == nodeElem.getIndex()) {
+					newNode.setNext(first.getNext());
+				}
+				if (nodeElem.getIndex() < second.getElement().getIndex()) {
+					newNode.setNext(second);
+					first.setNext(newNode);
+					size++;
+					break;
+				} // get the next elements
+				first = first.getNext();
+				second = second.getNext();
+
+			}
+		}
 	}
 
 	/**
@@ -155,7 +156,7 @@ public class SparseNumericVector implements Iterable {
 		// implement this method
 		// this return statement is here to satisfy the compiler - replace it
 		// with your code.
-	double dotProd = 0;
+		double dotProd = 0;
 
 		// Initialize iterators over the lists.
 		SparseNumericIterator first = new SparseNumericIterator(this);
@@ -181,7 +182,7 @@ public class SparseNumericVector implements Iterable {
 		}
 
 		return dotProd;
-		
+
 	}
 
 	/**
